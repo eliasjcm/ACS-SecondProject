@@ -187,17 +187,14 @@ export default class neo4jController {
         const session = driver.session();
         try {
             const result = await session.run(`MATCH (c:COURSE {name: '${data}'})-[:HAS]->(r)
-                                            OPTIONAL MATCH (r)-[:HAS]->(e)
-                                            RETURN {                            
-                                                idTopic : r.name,                                                                                
-                                                subTopics : COLLECT({
-                                                    id: e.name,
-                                                    contents: e.contents
-                                                })                                           
-                                            } as Topics`)
+            WITH r as topic
+            OPTIONAL MATCH (topic)-[:HAS]->(e)
+            with topic, COLLECT(e{id: e.name, contents: CASE WHEN e.contents IS NULL THEN null ELSE e.contents END })  as subT
+            RETURN {idTopic : topic.name, subTopics : CASE WHEN subT IS NULL THEN [] ELSE subT END} as Topics`)
+
             return result.records.map(i => i.get('Topics'))
 
-        } catch (e) { console.log(`Error: createSubtopic => ${e}`) }
+        } catch (e) { console.log(`Error: findTopicsCourse => ${e}`) }
         session.close();
     }
 
