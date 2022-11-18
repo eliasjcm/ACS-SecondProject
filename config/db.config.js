@@ -1,9 +1,9 @@
 import mysql from 'mysql'
 
 const dbConn = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "1234",
+    host: "general.mysql.database.azure.com",
+    user: "acs",
+    password: "acs1234",
     database: "bd2_tp1"
 });
 

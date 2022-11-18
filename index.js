@@ -13,7 +13,8 @@ app.use(cors());
 
 dotenv.config();
 
-const RedisClient = redis.createClient(process.env.REDIS_PORT, process.env.REDIS_HOST)
+const RedisClient = redis.createClient(6380, process.env.REDISCACHEHOSTNAME,
+    {auth_pass: process.env.REDISCACHEKEY, tls: {servername: process.env.REDISCACHEHOSTNAME}});
 
 app.use("/evaluation", evaluationRoutes);
 app.use("/users", userRoutes)
@@ -24,6 +25,7 @@ app.get('/', (req, res)=>{
 });
 
 RedisClient.on('error', err => {
+    console.log("Redis meco")
     console.log(err)
 })
 

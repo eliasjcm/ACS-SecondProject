@@ -4,7 +4,7 @@ import dotenv from "dotenv"
 dotenv.config()
 
 //const driver = neo4j.driver(process.env.NEO_URI, neo4j.auth.basic(process.env.NEO_USERNAME, process.env.NEO_PASSWORD));
-const driver = neo4j.driver("neo4j+s://4931b9f2.databases.neo4j.io:7687", neo4j.auth.basic("neo4j", "T50UgJXHOS1STaRbYUBFW_i69wBKOGnR4WHDAxd4Ti0"));
+const driver = neo4j.driver("neo4j+s://fddcaad9.databases.neo4j.io:7687", neo4j.auth.basic("neo4j", "L8dtaQGMiwNXYlU4YzUdWHCdOkcIhfGa6pMWFis0u64"));
 
 export default class neo4jController {
     //Retorna todos los nodos COURSE de  neo4j

@@ -137,6 +137,7 @@ export default class UsersController {
   }
 
   static async authUser(req, res) {
+    console.log("INSIDE AUTH USER");
     try {
       const { username, password } = req.body;
 
